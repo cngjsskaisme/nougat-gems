@@ -1,10 +1,10 @@
 **"Conversation Platform"**
 
-기술적인 관점에서 보면 **Frontend / Transport / Backend / AI Engine**이 각각 독립적인 계층으로 설계되어 있습니다.
+From a technical perspective, **Frontend / Transport / Backend / AI Engine** are each designed as independent layers.
 
 ---
 
-# 전체 구조
+# Overall Structure
 
 ```text
                         Browser (Nuxt)
@@ -96,7 +96,7 @@
 
 # FE Architecture
 
-Frontend는 크게 **7개의 Layer**입니다.
+The Frontend consists of **7 Layers**.
 
 ```text
 UI
@@ -130,7 +130,7 @@ Rendering
 
 # 1. UI Layer
 
-UI는
+The UI consists of
 
 ```text
 Deal Chat
@@ -148,17 +148,15 @@ BrandComparison
 SuggestionButtons
 ```
 
-등으로 구성됩니다.
+The UI itself is
 
-UI 자체가
-
-Block 기반입니다.
+Block-based.
 
 ---
 
 # 2. Chat State Layer
 
-많은 상태를 가집니다.
+It holds a lot of state.
 
 ```text
 messages
@@ -178,13 +176,13 @@ loading
 abortController
 ```
 
-등입니다.
+among others.
 
 ---
 
 # Conversation
 
-Conversation ID가 존재합니다.
+A Conversation ID exists.
 
 ```text
 conversationId
@@ -198,15 +196,15 @@ Backend
 DB
 ```
 
-으로 연결됩니다.
+It connects to these.
 
 ---
 
 # Chat Room
 
-Room도
+Rooms are also
 
-별도로 관리됩니다.
+managed separately.
 
 ```text
 localStorage
@@ -224,11 +222,11 @@ Restore
 
 # Scroll Manager
 
-Streaming 때문에
+Due to Streaming,
 
-자동 스크롤도
+auto-scroll is also
 
-별도 Layer입니다.
+a separate Layer.
 
 ```text
 IntersectionObserver
@@ -242,19 +240,19 @@ stickToBottom
 scrollIntoView()
 ```
 
-사용자가
+If the user
 
-위를 보고 있으면
+is looking at the top,
 
-자동 스크롤을 멈춥니다.
+auto-scroll stops.
 
 ---
 
 # API Layer
 
-Streaming Client입니다.
+It is a Streaming Client.
 
-대표 함수
+Representative function
 
 ```text
 streamDealChat()
@@ -262,7 +260,7 @@ streamDealChat()
 
 ---
 
-순서
+Order
 
 ```text
 fetch()
@@ -291,11 +289,11 @@ Event
 ---
 
 # Transport Layer
-특징입니다.
+This is a characteristic feature.
 
-Transport가
+Transport is
 
-독립 Layer입니다.
+an independent Layer.
 
 ```text
 Browser
@@ -317,7 +315,7 @@ Backend
 
 ## Nitro Proxy
 
-별도 API Route가 없습니다.
+There is no separate API Route.
 
 ```text
 /api/**
@@ -331,26 +329,26 @@ routeRules
 sendProxy()
 ```
 
-입니다.
+This is it.
 
 ---
 
-### 특징
+### Characteristics
 
 * Reverse Proxy
-* Streaming 유지
-* CORS 제거
-* Cache 제거
+* Streaming preservation
+* CORS removal
+* Cache removal
 
-모두 여기서 처리됩니다.
+All handled here.
 
 ---
 
 # Authentication Layer
 
-Transport 내부에 있습니다.
+It is inside Transport.
 
-클라이언트
+Client
 
 ```text
 Authorization
@@ -367,18 +365,18 @@ Signature
 SSR
 
 ```text
-X-Internal-Request
+X-internal-Request
 ```
 
-입니다.
+This is it.
 
 ---
 
 # Retry Layer
 
-Transport는
+Transport also
 
-401도 처리합니다.
+handles 401.
 
 ```text
 401
@@ -396,9 +394,9 @@ Retry
 
 # Streaming Layer
 
-Streaming도
+Streaming is also
 
-독립 Layer입니다.
+an independent Layer.
 
 ```text
 ReadableStream
@@ -422,9 +420,9 @@ JSON
 
 ---
 
-Buffer를
+Buffer is
 
-직접 관리합니다.
+managed directly.
 
 ```ts
 buffer += decoded
@@ -438,13 +436,13 @@ buffer = lastLine
 
 # Event Layer
 
-Streaming JSON은
+Streaming JSON is
 
-바로 UI가 아닙니다.
+not directly UI.
 
-먼저
+First
 
-Event가 됩니다.
+it becomes an Event.
 
 ```text
 meta
@@ -464,21 +462,19 @@ error
 
 ---
 
-Event Dispatcher가
+Event Dispatcher is
 
 ```text
 applyEvent()
 ```
 
-입니다.
-
 ---
 
 # Rendering Layer
 
-모든 Event는
+All Events
 
-Block가 됩니다.
+become Blocks.
 
 ```text
 text
@@ -508,15 +504,15 @@ comparison
 BrandComparison
 ```
 
-입니다.
+This is it.
 
 ---
 
 # Backend Architecture
 
-Backend는
+The Backend consists of
 
-7개의 Layer입니다.
+7 Layers.
 
 ```text
 HTTP
@@ -550,15 +546,15 @@ Parser
 
 # HTTP Layer
 
-Controller입니다.
+It is a Controller.
 
 ```text
 POST /deals/chat
 ```
 
-만 담당합니다.
+It handles only this.
 
-역할
+Role
 
 ```text
 Response Header
@@ -568,15 +564,15 @@ Abort
 Stream Write
 ```
 
-입니다.
+This is it.
 
 ---
 
 # Streaming Layer
 
-Controller는
+The Controller is
 
-Streaming Relay입니다.
+a Streaming Relay.
 
 ```text
 LLM
@@ -598,17 +594,15 @@ NDJSON
 Browser
 ```
 
-입니다.
+This is it.
 
 ---
 
 # Chat Service
 
-Service는
+The Service
 
-Conversation을
-
-관리합니다.
+manages Conversations.
 
 ```text
 Prepare
@@ -626,11 +620,11 @@ Stream
 Finalize
 ```
 
-입니다.
+This is it.
 
 ---
 
-Finalize에서는
+In Finalize,
 
 ```text
 Assistant Message
@@ -644,15 +638,15 @@ DB
 Mentioned Deals
 ```
 
-를 저장합니다.
+are saved.
 
 ---
 
 # Conversation Layer
 
-Conversation은
+Conversation is
 
-DB 중심입니다.
+DB-centric.
 
 ```text
 Conversation
@@ -670,23 +664,23 @@ Summary
 Turn Context
 ```
 
-입니다.
+This is it.
 
 ---
 
 # Chat Orchestrator
 
-여기가
+This is
 
-핵심입니다.
+the core.
 
-모든 Context를
+All Context is
 
-생성합니다.
+generated here.
 
 ---
 
-순서는
+The order is
 
 ```text
 Question
@@ -728,15 +722,15 @@ Summary
 Conversation Context
 ```
 
-입니다.
+This is it.
 
 ---
 
 # Intent Analyzer
 
-질문을
+It classifies
 
-분류합니다.
+questions.
 
 ```text
 Recommendation
@@ -758,9 +752,9 @@ Unknown
 
 # Search Layer
 
-검색도
+Search is also
 
-여러 단계입니다.
+multiple stages.
 
 ```text
 Expand
@@ -786,11 +780,11 @@ Comments
 
 # Memory Layer
 
-Conversation Summary도
+Conversation Summary also
 
-존재합니다.
+exists.
 
-두 종류입니다.
+There are two types.
 
 ```text
 Fixed RAG
@@ -828,9 +822,9 @@ Pending
 
 # Prompt Builder
 
-Prompt도
+Prompt is also
 
-계층적입니다.
+hierarchical.
 
 ```text
 System
@@ -864,9 +858,9 @@ Question
 
 # LLM Gateway
 
-LLM도
+LLM is also
 
-Gateway입니다.
+a Gateway.
 
 ```text
 createCompletion()
@@ -874,17 +868,17 @@ createCompletion()
 streamCompletion()
 ```
 
-둘 다 제공합니다.
+Both are provided.
 
 ---
 
 # Parser Layer
 
-가장 중요한 Layer입니다.
+This is the most important Layer.
 
-LLM Output을
+LLM Output is
 
-직접 UI에 쓰지 않습니다.
+not used directly in UI.
 
 ```text
 Raw Text
@@ -902,7 +896,7 @@ Semantic Block
 NDJSON Event
 ```
 
-입니다.
+This is it.
 
 ---
 
@@ -922,11 +916,11 @@ block/questions
 done
 ```
 
-입니다.
+This is it.
 
 ---
 
-# 전체 Sequence
+# Overall Sequence
 
 ```text
 User
@@ -994,13 +988,13 @@ Vue Components
 
 ---
 
-# 기술적 특징
+# Technical Characteristics
 
 ## 1. Stateful Backend
 
-Conversation이
+Conversation is
 
-DB에 저장됩니다.
+saved in DB.
 
 ```text
 Conversation
@@ -1018,17 +1012,15 @@ Summary
 Mentioned Deals
 ```
 
-입니다.
+This is it.
 
 ---
 
 ## 2. Streaming First
 
-전체가
+The entire system is
 
-Streaming 기준으로
-
-설계되었습니다.
+designed around Streaming.
 
 ```text
 Token
@@ -1050,15 +1042,15 @@ Event
 UI
 ```
 
-입니다.
+This is it.
 
 ---
 
 ## 3. Layer Separation
 
-역할이
+Roles are
 
-명확히 나뉩니다.
+clearly separated.
 
 ```text
 Controller
@@ -1084,37 +1076,35 @@ Gateway
 Parser
 ```
 
-입니다.
+This is it.
 
 ---
 
 ## 4. Context-driven AI
 
-Prompt보다
+Context generation is
 
-Context 생성이
+more important than
 
-더 중요합니다.
+the Prompt.
 
-LLM은
+LLM does not
 
-검색하지 않습니다.
+search.
 
-이미
+It uses
 
-검색된 Context를
-
-사용합니다.
+already searched Context.
 
 ---
 
 ## 5. Component-driven Rendering
 
-UI도
+UI is also
 
-Markdown이 아니라
+not Markdown but
 
-Block입니다.
+Blocks.
 
 ```text
 LLM
@@ -1128,61 +1118,61 @@ Block
 Vue Component
 ```
 
-입니다.
+This is it.
 
 ---
 
-# 기술적인 장점
+# Technical Advantages
 
-### 확장성
+### Scalability
 
-새로운 기능을 추가할 때는 대부분 특정 계층만 수정하면 됩니다.
+When adding new features, you mostly only need to modify a specific layer.
 
-* 새로운 검색 전략 → `ChatOrchestrator`
-* 새로운 응답 블록 → `SectionBlockParser` + Vue 컴포넌트
-* 새로운 LLM → `LlmRealtimeGateway`
-* 새로운 UI → Block 컴포넌트 추가
+* New search strategy → `ChatOrchestrator`
+* New response block → `SectionBlockParser` + Vue component
+* New LLM → `LlmRealtimeGateway`
+* New UI → Add Block component
 
-계층 간 책임이 비교적 명확하게 분리되어 있습니다.
-
----
-
-### 실시간 UX
-
-NDJSON + `ReadableStream` 기반으로 토큰이 생성되는 즉시 UI를 갱신하므로 체감 응답성이 좋습니다.
+Responsibilities between layers are relatively clearly separated.
 
 ---
 
-### 대화 지속성
+### Real-time UX
 
-Conversation, Message, Summary를 저장하므로 장기 대화와 이어하기가 가능합니다.
-
----
-
-### RAG 친화적 구조
-
-검색, 카테고리 결정, 댓글 요약, 대화 요약이 모두 LLM 호출 이전 단계에서 준비되므로 Prompt가 일관되고 재현성이 높습니다.
+Based on NDJSON + `ReadableStream`, the UI is updated as soon as tokens are generated, providing good perceived responsiveness.
 
 ---
 
-# 현재 구조의 한계
+### Conversation Persistence
 
-현재 구조에서 가장 큰 개선 포인트는 **`ChatOrchestrator`가 너무 많은 책임을 가지고 있다는 점**입니다.
+Since Conversation, Message, and Summary are saved, long-term conversations and resuming conversations are possible.
 
-현재 `ChatOrchestrator`는 동시에 다음 역할을 수행합니다.
+---
 
-* Intent 분석
-* 검색 키워드 확장
-* ElasticSearch 조회
-* 카테고리 결정
-* 댓글 로드
-* RAG Summary 조회/생성
-* Conversation 생성 및 복원
-* Prompt Context 조립
+### RAG-friendly Structure
 
-즉, 하나의 클래스가 **Conversation Coordinator + Retrieval Coordinator + Context Builder**의 역할을 모두 담당하고 있습니다.
+Since search, category determination, comment summarization, and conversation summarization are all prepared in stages before the LLM call, the Prompt is consistent and highly reproducible.
 
-장기적으로는 다음과 같이 더 세분화하는 것이 이상적입니다.
+---
+
+# Limitations of the Current Structure
+
+The biggest improvement point in the current structure is **that `ChatOrchestrator` has too many responsibilities**.
+
+Currently, `ChatOrchestrator` performs the following roles simultaneously.
+
+* Intent analysis
+* Search keyword expansion
+* ElasticSearch query
+* Category determination
+* Comment loading
+* RAG Summary retrieval/generation
+* Conversation creation and restoration
+* Prompt Context assembly
+
+In other words, a single class handles the roles of **Conversation Coordinator + Retrieval Coordinator + Context Builder** all at once.
+
+In the long term, it would be ideal to further subdivide it as follows.
 
 ```text
 ChatOrchestrator
@@ -1194,14 +1184,14 @@ ChatOrchestrator
 └── PromptBuilder
 ```
 
-이렇게 분리하면 현재의 강점(스트리밍, 이벤트 기반 UI, RAG, 장기 대화)을 유지하면서도 각 계층의 테스트와 유지보수가 훨씬 쉬워지고, 새로운 AI 기능을 추가하기도 수월해질 것입니다.
+By separating it this way, while maintaining the current strengths (streaming, event-driven UI, RAG, long-term conversations), testing and maintenance of each layer would become much easier, and adding new AI features would also be more straightforward.
 
 
 # FE Transport Layer (Streaming Proxy)
 
-가장 큰 특징 중 하나는 **Nuxt API Route를 사용하지 않고, Nitro의 `routeRules` Reverse Proxy를 사용한다는 점**입니다.
+One of the biggest characteristics is **that it does not use Nuxt API Routes, but instead uses Nitro's `routeRules` Reverse Proxy**.
 
-즉
+In other words
 
 ```text
 Browser
@@ -1219,7 +1209,7 @@ Nitro Reverse Proxy
 Backend
 ```
 
-입니다.
+This is it.
 
 ---
 
@@ -1244,17 +1234,17 @@ sendProxy()
 Backend
 ```
 
-입니다.
+This is it.
 
-API Route가 없습니다.
+There is no API Route.
 
-Proxy가 API Layer를 대신합니다.
+The Proxy replaces the API Layer.
 
 ---
 
 # Nitro routeRules
 
-실제로는
+In practice, it is
 
 ```ts
 routeRules
@@ -1268,19 +1258,19 @@ proxy
 sendProxy()
 ```
 
-입니다.
+This is it.
 
-모든
+All
 
 ```text
 /api/*
 ```
 
-요청이
+requests are
 
-Backend로 그대로 전달됩니다.
+passed directly to the Backend.
 
-즉
+In other words
 
 ```text
 /api/deals/chat
@@ -1290,19 +1280,17 @@ Backend로 그대로 전달됩니다.
 http://backend/api/deals/chat
 ```
 
-입니다.
+This is it.
 
 ---
 
 # Streaming Friendly Proxy
 
-가장 중요한 부분입니다.
+This is the most important part.
 
-Nitro는
+Nitro does not
 
-Streaming Response를
-
-재조립하지 않습니다.
+reassemble Streaming Responses.
 
 ```text
 Backend
@@ -1324,17 +1312,17 @@ Chunk
 Browser
 ```
 
-입니다.
+This is it.
 
-즉
+In other words
 
-Streaming을 그대로 유지합니다.
+Streaming is preserved as-is.
 
 ---
 
 # Why not server/api?
 
-Nuxt API Route를 사용하면
+If you use Nuxt API Routes,
 
 ```ts
 const result = await fetch(...)
@@ -1342,19 +1330,19 @@ const result = await fetch(...)
 return result
 ```
 
-같은
+you would need to create
 
-Wrapper를 만들어야 합니다.
+a Wrapper like this.
 
-Streaming에서는
+In Streaming,
 
-이 Wrapper가
+this Wrapper
 
-오히려 방해가 됩니다.
+actually gets in the way.
 
 ---
 
-routeRules는
+routeRules only does
 
 ```text
 Receive
@@ -1364,45 +1352,43 @@ Receive
 Forward
 ```
 
-만 합니다.
+Therefore
 
-그래서
-
-Streaming Loss가 없습니다.
+there is no Streaming Loss.
 
 ---
 
 # Client Transport Layer
 
-Frontend는
+The Frontend does not
 
-High Level API를 사용하지 않습니다.
+use High Level APIs.
 
-대표 함수
+Representative function
 
 ```text
 apiFetchRaw()
 ```
 
-입니다.
+This is it.
 
-왜냐하면
+Because
 
-Streaming에서는
+in Streaming,
 
 ```text
 Response.body
 ```
 
-가 필요하기 때문입니다.
+is needed.
 
 ---
 
 # ReadableStream
 
-Transport는
+Transport uses
 
-Browser Native API를 사용합니다.
+Browser Native APIs.
 
 ```text
 fetch()
@@ -1424,39 +1410,39 @@ Reader
 Chunk
 ```
 
-입니다.
+This is it.
 
-Chunk가 도착하는 즉시
+Chunks are processed
 
-처리합니다.
+as soon as they arrive.
 
 ---
 
 # Buffer Management
 
-Streaming에서는
+In Streaming,
 
-Chunk가
+a Chunk is
 
-항상 JSON 하나가 아닙니다.
+not always one complete JSON.
 
-예를 들어
+For example
 
-첫 번째 Chunk
+First Chunk
 
 ```text
 {"type":"te
 ```
 
-두 번째 Chunk
+Second Chunk
 
 ```text
 xt","content":"안녕하세요"}
 ```
 
-입니다.
+This is it.
 
-그래서
+So
 
 ```text
 buffer
@@ -1466,41 +1452,35 @@ buffer
 decoded
 ```
 
-합니다.
-
-그리고
+And then
 
 ```text
 split("\n")
 ```
 
-합니다.
+The last line is
 
-마지막 줄은
+kept until
 
-다음 Chunk까지
+the next Chunk.
 
-보관합니다.
+This is
 
-이게
-
-Transport Layer의 핵심입니다.
+the core of the Transport Layer.
 
 ---
 
 # NDJSON Parser
 
-Buffer에서
+From the Buffer,
 
-완전한 Line만
+only complete Lines are
 
 ```text
 JSON.parse()
 ```
 
-합니다.
-
-즉
+In other words
 
 ```text
 Bytes
@@ -1522,15 +1502,15 @@ JSON
 Event
 ```
 
-입니다.
+This is it.
 
 ---
 
 # Abort Propagation
 
-Transport Layer는
+The Transport Layer also
 
-취소도 담당합니다.
+handles cancellation.
 
 ```text
 Browser Abort
@@ -1560,23 +1540,23 @@ Backend
 LLM Cancel
 ```
 
-즉
+In other words
 
-사용자가
+when the user
 
-중지 버튼을 누르면
+presses the stop button,
 
-LLM까지
+even the LLM
 
-중단됩니다.
+is aborted.
 
 ---
 
 # Authentication
 
-Transport Layer 안에는
+Inside the Transport Layer,
 
-인증도 포함됩니다.
+authentication is also included.
 
 Client
 
@@ -1593,24 +1573,24 @@ Signature
 SSR
 
 ```text
-X-Internal-Request
+X-internal-Request
 ```
 
-입니다.
+This is it.
 
-Transport 자체가
+Transport itself is
 
-Security Layer입니다.
+a Security Layer.
 
 ---
 
 # Retry
 
-401이면
+If 401,
 
-Transport가
+Transport
 
-자동으로
+automatically
 
 ```text
 guest/init
@@ -1620,45 +1600,43 @@ guest/init
 Retry
 ```
 
-합니다.
+Business Logic
 
-Business Logic은
+does not know
 
-Retry를
-
-모릅니다.
+about Retry.
 
 ---
 
 # Runtime
 
-Browser에서는
+In the Browser,
 
 ```text
 /api
 ```
 
-를 호출합니다.
+is called.
 
-SSR에서는
+In SSR,
 
 ```text
 runtimeConfig.apiBaseUrl
 ```
 
-을 사용합니다.
+is used.
 
-즉
+In other words
 
-Runtime에 따라
+depending on the Runtime,
 
-Transport가 달라집니다.
+Transport changes.
 
 ---
 
 # Production Layer
 
-Production에서는
+In Production,
 
 ```text
 Apache / Nginx
@@ -1680,23 +1658,21 @@ RouteRules Proxy
 Backend
 ```
 
-입니다.
+This is it.
 
-Streaming이
+Streaming is
 
-끝까지 유지됩니다.
+maintained all the way through.
 
 ---
 
 # Environment
 
-routeRules는
+routeRules are
 
-빌드 시점에
+created at build time.
 
-생성됩니다.
-
-즉
+In other words
 
 ```text
 nuxt.config.ts
@@ -1710,15 +1686,15 @@ API_BASE_URL
 Proxy
 ```
 
-입니다.
+This is it.
 
-따라서
+Therefore
 
-환경변수는
+environment variables
 
-빌드 전에
+must exist
 
-존재해야 합니다.
+before the build.
 
 ---
 
@@ -1786,19 +1762,19 @@ applyEvent()
 
 ---
 
-## 제가 보기에는 이 부분이 핵심 기술 중 하나입니다.
+## In my view, this is one of the core technologies.
 
-많은 사람들이 **RAG**나 **ChatOrchestrator**에 먼저 주목하지만, 실제로는 **Transport Layer의 완성도가 상당히 높습니다.**
+Many people first focus on **RAG** or **ChatOrchestrator**, but in reality, **the Transport Layer is quite well-implemented.**
 
-특히 다음 요소들이 하나의 계층으로 자연스럽게 통합되어 있습니다.
+In particular, the following elements are naturally integrated as a single layer.
 
-* **Nitro `routeRules` 기반 Reverse Proxy**
+* **Nitro `routeRules` based Reverse Proxy**
 * **NDJSON Streaming**
-* **`ReadableStream` 기반 Chunk 처리**
-* **버퍼 관리 및 줄 단위 파싱**
-* **Abort 전파**
-* **Guest 인증 및 서명 헤더**
-* **401 자동 재시도**
-* **SSR/CSR별 API Endpoint 추상화**
+* **`ReadableStream` based Chunk processing**
+* **Buffer management and line-by-line parsing**
+* **Abort propagation**
+* **Guest authentication and signature headers**
+* **401 automatic retry**
+* **SSR/CSR-specific API Endpoint abstraction**
 
-즉, 단순히 "채팅을 스트리밍한다" 수준이 아니라, **Transport 자체를 독립적인 아키텍처 계층으로 설계한 프로젝트**라고 평가할 수 있습니다.
+In other words, it is not simply at the level of "streaming chat," but can be evaluated as **a project where Transport itself is designed as an independent architectural layer.**

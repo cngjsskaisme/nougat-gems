@@ -1,10 +1,10 @@
-**"Stateless AI Chat + Client State Machine + End-to-End Encryption"** 구조입니다.
+**"Stateless AI Chat + Client State Machine + End-to-End Encryption"** structure.
 
-전체적인 구현은 매우 단순하지만, 각 계층의 책임이 비교적 명확하게 나뉘어 있습니다.
+The overall implementation is very simple, but the responsibilities of each layer are relatively clearly divided.
 
 ---
 
-# 전체 구조
+# Overall Structure
 
 ```text
                     Browser (Nuxt)
@@ -54,7 +54,7 @@
 
 # FE Architecture
 
-FE는 크게 **6개의 Layer**로 구성됩니다.
+The FE consists of **6 Layers**.
 
 ```text
 UI
@@ -84,7 +84,7 @@ Nuxt API
 
 # 1. UI Layer
 
-실제 사용자 인터페이스입니다.
+This is the actual user interface.
 
 ```
 DesktopChat
@@ -98,37 +98,37 @@ ActionCard
 FloatingPromptBar
 ```
 
-역할은 단순합니다.
+The role is simple.
 
 ```
-입력
+Input
 
 ↓
 
-출력
+Output
 
 ↓
 
-상태 반영
+State reflection
 ```
 
-비즈니스 로직은 거의 없습니다.
+There is almost no business logic.
 
 ---
 
 # 2. Chat State Layer
 
-여기가 핵심입니다.
+This is the core.
 
-모든 상태는
+All state is
+
+managed inside
 
 ```
 useChatState
 ```
 
-안에서 관리됩니다.
-
-보유하는 상태는
+The states it holds are
 
 ```text
 messages
@@ -144,21 +144,19 @@ draft
 inquiryState
 ```
 
-등입니다.
+among others.
 
-즉
+In other words
 
 ```text
 Application State
 ```
 
-입니다.
-
 ---
 
 # Inquiry State Machine
 
-Resume의 가장 큰 특징입니다.
+This is the biggest feature of Resume.
 
 ```text
 idle
@@ -180,17 +178,17 @@ sending
 sent
 ```
 
-문의 기능은
+The inquiry feature is
 
-모두 이 State Machine으로 처리됩니다.
+all handled by this State Machine.
 
 ---
 
 # Message Store
 
-메시지는
+Messages are
 
-메모리 배열 하나입니다.
+a single in-memory array.
 
 ```ts
 messages = [
@@ -201,23 +199,23 @@ messages = [
 ]
 ```
 
-DB는 없습니다.
+There is no DB.
 
-새로고침하면 초기화됩니다.
+It resets on refresh.
 
 ---
 
 # Context Builder
 
-LLM으로 보내기 전에
+Before sending to the LLM,
 
-Conversation을 문자열로 변환합니다.
+it converts the Conversation into a string.
 
 ```
 handleContextMessageTextArray()
 ```
 
-역할
+Role
 
 ```text
 messages
@@ -235,27 +233,25 @@ draft
 Prompt Text
 ```
 
-입니다.
+This is it.
 
-즉
+In other words
 
-Conversation Serialization입니다.
+it is Conversation Serialization.
 
 ---
 
 # API Layer
 
-실제 API 호출입니다.
+This is the actual API call.
 
-대표 함수는
+The representative function is
 
 ```
 askGemini()
 ```
 
-입니다.
-
-이 함수가
+This function calls
 
 ```
 /api/public-key
@@ -263,15 +259,13 @@ askGemini()
 /api/chat
 ```
 
-을 호출합니다.
-
 ---
 
 # Encryption Layer
 
-Resume의 특징입니다.
+This is a feature of Resume.
 
-순서는
+The order is
 
 ```text
 GET PublicKey
@@ -293,23 +287,23 @@ AES Encrypt Prompt
 POST /chat
 ```
 
-입니다.
+This is it.
 
-응답도
+The response is also
 
-AES로 복호화합니다.
+decrypted with AES.
 
-즉
+In other words
 
-Application Layer 안에
+inside the Application Layer,
 
-Crypto Layer가 존재합니다.
+a Crypto Layer exists.
 
 ---
 
 # Response Layer
 
-LLM 응답은
+The LLM response is
 
 ```json
 {
@@ -318,27 +312,27 @@ LLM 응답은
 }
 ```
 
-입니다.
+This is it.
 
-normalize 단계에서
+In the normalize stage,
 
 ```
 normalizeChatResponse()
 ```
 
-가
+performs
 
-Validation을 수행합니다.
+Validation.
 
 ---
 
 # UI Dispatcher
 
-answerType에 따라
+Depending on answerType,
 
-UI를 바꿉니다.
+the UI changes.
 
-예를 들면
+For example
 
 ```text
 plainMarkdown
@@ -368,15 +362,15 @@ confirmSendTextMessage
 Send Inquiry
 ```
 
-입니다.
+This is it.
 
 ---
 
 # Nuxt API Layer
 
-FE에는
+The FE has
 
-얇은 API Proxy가 있습니다.
+a thin API Proxy.
 
 ```
 /api/public-key
@@ -386,13 +380,13 @@ FE에는
 /api/send-message
 ```
 
-각각
+Each one
 
-Backend를
+simply proxies
 
-단순 Proxy합니다.
+the Backend.
 
-예를 들어
+For example
 
 ```
 Browser
@@ -406,15 +400,15 @@ Nuxt
 Backend
 ```
 
-입니다.
+This is it.
 
 ---
 
 # Backend Architecture
 
-Backend도
+The Backend also
 
-Layer가 있습니다.
+has Layers.
 
 ```text
 HTTP
@@ -440,23 +434,23 @@ Encrypt
 Return
 ```
 
-매우 단순합니다.
+It is very simple.
 
 ---
 
 # HTTP Layer
 
-Bun의
+It is a single
 
 ```
 serve()
 ```
 
-하나입니다.
+from Bun.
 
-Routing도
+Routing is also
 
-직접 합니다.
+done directly.
 
 ```
 /chat
@@ -472,7 +466,7 @@ Routing도
 
 # Crypto Layer
 
-서버 시작 시
+At server startup,
 
 ```text
 RSA 4096
@@ -482,13 +476,13 @@ RSA 4096
 Key Pair
 ```
 
-를 생성합니다.
+is generated.
 
-클라이언트가
+When the client
 
-AES Key를 보내면
+sends an AES Key,
 
-```
+```text
 RSA Decrypt
 
 ↓
@@ -496,15 +490,15 @@ RSA Decrypt
 AES Session
 ```
 
-이 됩니다.
+it becomes this.
 
 ---
 
 # Chat Layer
 
-/chat 요청은
+The /chat request has
 
-순서가 명확합니다.
+a clear order.
 
 ```text
 Decrypt
@@ -526,17 +520,17 @@ Encrypt
 Return
 ```
 
-Stateless입니다.
+It is Stateless.
 
 ---
 
 # Prompt Builder
 
-Backend에는
+The Backend has
 
-거대한 Prompt Builder가 있습니다.
+a massive Prompt Builder.
 
-순서는
+The order is
 
 ```text
 Rules
@@ -558,19 +552,19 @@ Conversation
 Output Schema
 ```
 
-입니다.
+This is it.
 
-Prompt가
+The Prompt is
 
-거의 Business Logic입니다.
+almost the Business Logic.
 
 ---
 
 # LLM Gateway
 
-Vendor를
+It abstracts
 
-추상화합니다.
+Vendors.
 
 ```text
 GPT
@@ -580,21 +574,19 @@ Gemini
 Mercury
 ```
 
-모두
+All are called through
 
 ```
 callGPT()
 ```
 
-를 통해 호출됩니다.
-
 ---
 
 # Output Contract
 
-LLM은
+The LLM must
 
-항상
+always return
 
 ```json
 {
@@ -603,19 +595,17 @@ LLM은
 }
 ```
 
-를 반환해야 합니다.
+In other words
 
-즉
+the LLM
 
-LLM이
-
-API Contract를 따릅니다.
+follows the API Contract.
 
 ---
 
 # Telegram Layer
 
-문의는
+Inquiries are
 
 ```text
 Decrypt
@@ -629,15 +619,15 @@ Telegram Format
 Telegram API
 ```
 
-입니다.
+This is it.
 
-DB 저장 없이
+Without DB storage,
 
-즉시 전달됩니다.
+it is delivered immediately.
 
 ---
 
-# 전체 Sequence
+# Overall Sequence
 
 ```text
 User
@@ -709,40 +699,38 @@ UI
 
 ---
 
-# 기술적 특징
+# Technical Characteristics
 
 ## 1. Stateless Backend
 
-Backend는
+The Backend does not
 
-Conversation을
+save Conversations.
 
-저장하지 않습니다.
+All requests are
 
-모든 요청이
+independent.
 
-독립적입니다.
+Advantages
 
-장점
+* Scalability
+* Simplicity
 
-* 확장성
-* 단순성
+Disadvantages
 
-단점
-
-* Long Conversation 불리
+* Disadvantageous for Long Conversations
 
 ---
 
 ## 2. FE State Machine
 
-Resume는
+In Resume,
 
-Backend보다
+the Frontend manages
 
-Frontend가
+State more than
 
-State를 관리합니다.
+the Backend.
 
 ```
 idle
@@ -756,24 +744,24 @@ sending
 sent
 ```
 
-이 핵심입니다.
+This is the core.
 
 ---
 
 ## 3. Prompt-driven Workflow
 
-Resume는
+In Resume,
 
-Workflow가
+the Workflow is
 
-코드가 아니라
+in the Prompt,
 
-Prompt에 있습니다.
+not in the code.
 
-예를 들면
+For example
 
 ```
-협업 문의
+Collaboration inquiry
 
 ↓
 
@@ -784,23 +772,25 @@ LLM
 promptTextMessage
 ```
 
-입니다.
+This is it.
 
-즉
+In other words
 
-LLM이
+the LLM
 
-Workflow Engine 역할을 합니다.
+acts as a Workflow Engine.
 
 ---
 
-## 4. Contract 기반 응답
+## 4. Contract-based Response
 
-LLM이
+The LLM does not
 
-자유로운 Markdown을 생성하지 않습니다.
+generate free-form Markdown.
 
-반드시
+It must always
+
+generate
 
 ```json
 {
@@ -808,23 +798,21 @@ LLM이
 }
 ```
 
-를 생성해야 합니다.
+The FE
 
-FE는
-
-이 Contract만 믿습니다.
+only trusts this Contract.
 
 ---
 
 ## 5. Client-side Encryption
 
-Prompt가
+The Prompt is
 
-Browser에서
+encrypted with AES
 
-AES로 암호화됩니다.
+in the Browser.
 
-즉
+In other words
 
 ```
 Browser
@@ -842,17 +830,17 @@ Network
 Server
 ```
 
-입니다.
+This is it.
 
-LLM Prompt 자체가
+The LLM Prompt itself
 
-평문으로 이동하지 않습니다.
+does not travel in plaintext.
 
 ---
 
-# 기술적인 장점
+# Technical Advantages
 
-### 매우 단순한 구조
+### Very Simple Structure
 
 ```text
 FE
@@ -866,27 +854,25 @@ BE
 LLM
 ```
 
-이므로
+Since it is this simple,
 
-디버깅이 쉽습니다.
-
----
-
-### FE 중심 구조
-
-State가
-
-한 곳(useChatState)에
-
-모여 있습니다.
+debugging is easy.
 
 ---
 
-### Vendor 교체가 쉬움
+### FE-centric Structure
 
-LLM Gateway가
+State is
 
-추상화되어 있어
+all gathered in one place (useChatState).
+
+---
+
+### Easy Vendor Replacement
+
+Since the LLM Gateway is
+
+abstracted,
 
 GPT
 
@@ -898,38 +884,38 @@ Gemini
 
 Mercury
 
-교체가 쉽습니다.
+replacement is easy.
 
 ---
 
-### 보안
+### Security
 
-RSA + AES를 적용하여
+By applying RSA + AES,
 
-전송 중 Prompt 및 문의 내용이 암호화됩니다.
+the Prompt and inquiry content are encrypted during transmission.
 
 ---
 
-# 현재 구조의 한계
+# Limitations of the Current Structure
 
-기술적으로 가장 큰 한계는 **Business Logic의 상당 부분이 Prompt에 포함되어 있다는 점**입니다.
+The biggest technical limitation is **that a significant portion of the Business Logic is included in the Prompt**.
 
-현재 구조에서는 다음과 같은 역할을 LLM이 담당합니다.
+In the current structure, the LLM is responsible for the following roles.
 
-* 협업 의도 판단
-* 문의 입력 단계 판단
-* 전송 승인 여부 판단
-* `answerType` 선택
+* Determining collaboration intent
+* Determining the inquiry input stage
+* Determining whether to approve transmission
+* Selecting `answerType`
 
-즉, 코드보다는 Prompt가 상태 전이의 중심입니다.
+In other words, the Prompt rather than the code is the center of state transitions.
 
-또한 백엔드가 완전히 Stateless이기 때문에 다음과 같은 기능은 기본적으로 어렵습니다.
+Additionally, since the backend is completely Stateless, the following features are fundamentally difficult.
 
-* 장기 대화 메모리
-* Conversation 복원
-* 대화 요약
-* RAG 기반 검색
-* 스트리밍 UI
-* 구조화된 이벤트 기반 렌더링
+* Long-term conversation memory
+* Conversation restoration
+* Conversation summarization
+* RAG-based search
+* Streaming UI
+* Structured event-based rendering
 
-반대로 이러한 단순성 덕분에 **포트폴리오 사이트의 AI 챗봇**이라는 목적에는 매우 적합한 구조입니다. 구현 복잡도가 낮고, 유지보수도 쉬우며, 암호화와 문의 워크플로우를 포함한 핵심 요구사항을 비교적 작은 코드베이스로 충족하고 있다는 점이 이 아키텍처의 가장 큰 장점입니다.
+On the other hand, thanks to this simplicity, it is a very suitable structure for the purpose of **an AI chatbot for a portfolio site**. The low implementation complexity, easy maintenance, and the fact that it fulfills core requirements including encryption and inquiry workflow with a relatively small codebase are the biggest advantages of this architecture.

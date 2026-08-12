@@ -14,26 +14,26 @@
 
 # nougat-snippet
 
-작업하면서 쌓아온 노하우, 반복 가능한 프로세스, 유용한 코드 조각과 운영 팁을 모아두는 스니펫 저장소입니다.
+A snippet repository that collects know-how accumulated through work, repeatable processes, useful code snippets, and operational tips.
 
-## 목적
+## Purpose
 
-`nougat-snippet`은 매번 새로 고민하지 않기 위한 지식 베이스입니다.
-자주 쓰는 패턴, 문제 해결 과정, 체크리스트, 자동화 아이디어를 정리해 빠르게 재사용할 수 있도록 합니다.
+`nougat-snippet` is a knowledge base designed so you don't have to think things through from scratch every time.
+It organizes frequently used patterns, problem-solving processes, checklists, and automation ideas for quick reuse.
 
-## 담는 것
+## What We Store
 
-* 개발 작업 노하우
-* 프로젝트 진행 프로세스
-* 디버깅 및 트러블슈팅 기록
-* 반복 업무 체크리스트
-* 코드 스니펫
-* 문서화 템플릿
-* 생산성 개선 팁
+* Development work know-how
+* Project execution processes
+* Debugging and troubleshooting records
+* Repeatable task checklists
+* Code snippets
+* Documentation templates
+* Productivity improvement tips
 
-## 원칙
+## Principles
 
-작게 기록하고, 자주 꺼내 쓰고, 계속 개선합니다.
+Record small, reuse often, and keep improving.
 
 ```txt
 Capture → Refine → Reuse → Improve
