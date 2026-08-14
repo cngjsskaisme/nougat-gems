@@ -1,0 +1,19 @@
+id: origin-008
+name: structured-ui-contract
+type: origin
+status: draft
+version: 0.1.0
+
+domains:
+  - llm
+  - generated-ui
+  - workflow
+
+targets:
+  - backend
+  - frontend
+
+dependencies: []
+parents: []
+validated_contexts:
+  - constrained-llm-ui

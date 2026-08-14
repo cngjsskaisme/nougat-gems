@@ -1,0 +1,18 @@
+id: origin-003
+name: hybrid-encryption
+type: origin
+status: draft
+version: 0.1.0
+
+domains:
+  - security
+  - encryption
+
+targets:
+  - backend
+  - frontend
+
+dependencies: []
+parents: []
+validated_contexts:
+  - browser-to-backend-payload-protection

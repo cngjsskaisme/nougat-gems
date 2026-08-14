@@ -1,0 +1,18 @@
+id: origin-001
+name: streaming-proxy
+type: origin
+status: draft
+version: 0.1.0
+
+domains:
+  - transport
+  - streaming
+
+targets:
+  - backend
+  - frontend
+
+dependencies: []
+parents: []
+validated_contexts:
+  - http-streaming

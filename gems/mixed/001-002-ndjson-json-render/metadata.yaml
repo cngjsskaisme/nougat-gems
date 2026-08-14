@@ -1,0 +1,22 @@
+id: mixed-001-002
+name: ndjson-json-render-adapter
+type: mixed
+status: draft
+version: 0.1.0
+
+domains:
+  - transport
+  - streaming
+  - generated-ui
+
+targets:
+  - backend
+  - frontend
+
+dependencies:
+  - json-render
+parents:
+  - origin-001
+  - origin-002
+validated_contexts:
+  - streamed-generated-ui

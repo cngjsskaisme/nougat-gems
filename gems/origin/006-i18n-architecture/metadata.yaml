@@ -1,0 +1,20 @@
+id: origin-006
+name: i18n-architecture
+type: origin
+status: draft
+version: 0.1.0
+
+domains:
+  - frontend
+  - i18n
+  - seo
+  - content
+
+targets:
+  - frontend
+  - backend
+
+dependencies: []
+parents: []
+validated_contexts:
+  - multi-locale-web-application

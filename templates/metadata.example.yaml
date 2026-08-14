@@ -1,0 +1,16 @@
+id: origin-000
+name: example-gem
+type: origin
+status: draft
+version: 0.1.0
+
+domains:
+  - example
+
+targets:
+  - backend
+
+dependencies: []
+parents: []
+
+validated_contexts: []
