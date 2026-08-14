@@ -1,0 +1,18 @@
+id: origin-005
+name: mobile-native-fab-avoidance
+type: origin
+status: draft
+version: 0.1.0
+
+domains:
+  - frontend
+  - mobile-web
+  - browser-compatibility
+
+targets:
+  - frontend
+
+dependencies: []
+parents: []
+validated_contexts:
+  - mobile-browser-fixed-ui

@@ -1,0 +1,18 @@
+id: origin-004
+name: url-overlay-navigation
+type: origin
+status: draft
+version: 0.1.0
+
+domains:
+  - frontend
+  - navigation
+  - overlay
+
+targets:
+  - frontend
+
+dependencies: []
+parents: []
+validated_contexts:
+  - spa-navigation

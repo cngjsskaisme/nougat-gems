@@ -1,0 +1,20 @@
+id: origin-007
+name: guest-hmac-auth
+type: origin
+status: draft
+version: 0.1.0
+
+domains:
+  - security
+  - authentication
+  - api-protection
+
+targets:
+  - backend
+  - frontend
+
+dependencies:
+  - shared-cache
+parents: []
+validated_contexts:
+  - anonymous-client-api
