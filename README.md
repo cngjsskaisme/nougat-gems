@@ -1,8 +1,8 @@
-# 💎 nougat-snippet
+# 💎 nougat-gems
 
 > **Mine proven software. Refine the decisions. Socket the Gems. Regenerate the code.**
 
-`nougat-snippet`은 실제 프로젝트에서 검증된 **Engineering Decision**을 재사용 가능한 설계 단위인 **Gem**으로 추출하고 보관하는 실험적 Gem Stash입니다.
+`nougat-gems`은 실제 프로젝트에서 검증된 **Engineering Decision**을 재사용 가능한 설계 단위인 **Gem**으로 추출하고 보관하는 실험적 Gem Stash입니다.
 
 코드를 그대로 복사하는 대신, 그 코드를 좋게 만든 책임·계약·실패 정책·보안 판단·상태 전이·Trade-off를 남기고 LLM/AI Agent가 현재 프로젝트의 Context에 맞게 다시 구현하도록 하는 방식을 **Gem Programming**이라고 부릅니다.
 
