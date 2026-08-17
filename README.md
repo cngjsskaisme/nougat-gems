@@ -1,8 +1,8 @@
-# 💎 nougat-snippet
+# 💎 nougat-gems
 
 > **Mine proven software. Refine the decisions. Socket the Gems. Regenerate the code.**
 
-`nougat-snippet` is an experimental **Gem Stash** for extracting proven **engineering decisions** from real-world software and preserving them as reusable design units called **Gems**.
+`nougat-gems` is an experimental **Gem Stash** for extracting proven **engineering decisions** from real-world software and preserving them as reusable design units called **Gems**.
 
 Instead of copying old implementations, Gem Programming keeps the responsibilities, contracts, failure policies, security decisions, state transitions, and trade-offs that made those implementations work well—then lets an LLM or AI agent regenerate code for the context of a new project.
 
